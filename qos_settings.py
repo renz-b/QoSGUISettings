@@ -1,5 +1,3 @@
-from dearpygui.core import *
-from dearpygui.simple import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -85,11 +83,9 @@ def qos_state():
     qos_state_tuple = (qos_on_radio_state, qos_off_radio_state)
     # (False, True): 'Off', (True, False): 'On
     if qos_state_tuple == (True, False):
-        state = 'On'
-        return state
+        return 1
     if qos_state_tuple == (False, True):
-        state = 'Off'
-        return state
+        return 0
 
 
 def click_radio_on():
@@ -104,26 +100,13 @@ def click_radio_off():
     print('QoS Off')
 
 
-def switch_button(sender, data):
-    add_window('QoS State', width=60, height=30)
-    add_text(f'QoS: {qos_state()}')
-    if qos_state == 'On':
-        delete_item('QoS State')
-        click_radio_off()
-    elif qos_state == 'Off':
-        click_radio_on()
-     
-
-def gui():
-    add_window('QoS Settings', width=240, height=240)
-    add_button('Switch', callback=switch_button)
-    start_dearpygui(primary_window='QoS Settings')
-
 
 def main():
     init_driver()
     login_and_navigation()
-    gui()
+    print(qos_state())
+    click_radio_off()
+    print(qos_state())
 
 
 if __name__ == '__main__':
