@@ -18,14 +18,14 @@ qos_on_radio = ''
 qos_off_radio = ''
 
 
-
 def init_driver():
     options = webdriver.ChromeOptions()
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    options.headless = False
+    options.headless = True
     global driver
     driver = webdriver.Chrome(executable_path=PATH, options=options)
     driver.get(MY_ROUTER_IP)
+    print('Page Loaded')
     
 
 def login_and_navigation():
@@ -67,7 +67,6 @@ def login_and_navigation():
         print('Found QoS Button and clicked')
 
 
-
 def qos_state():
     # qos_state returns boolean if selected or not, tuple
     global qos_on_radio, qos_off_radio
@@ -85,7 +84,12 @@ def qos_state():
 
     qos_state_tuple = (qos_on_radio_state, qos_off_radio_state)
     # (False, True): 'Off', (True, False): 'On
-    return qos_state_tuple
+    if qos_state_tuple == (True, False):
+        state = 'On'
+        return state
+    if qos_state_tuple == (False, True):
+        state = 'Off'
+        return state
 
 
 def click_radio_on():
@@ -100,25 +104,29 @@ def click_radio_off():
     print('QoS Off')
 
 
+def switch_button(sender, data):
+    add_window('QoS State', width=60, height=30)
+    add_text(f'QoS: {qos_state()}')
+    if qos_state == 'On':
+        delete_item('QoS State')
+        click_radio_off()
+    elif qos_state == 'Off':
+        click_radio_on()
+     
+
 def gui():
-    # add main window
-    # add text for QoS state if on off
-    # add radio button, try to make the button grey out or selected if already on (ie if True, True radio button is selected or cant be selected)
-    # Submit button
-    # Text "QoS is not set to {radiobutton state}
-    pass
+    add_window('QoS Settings', width=240, height=240)
+    add_button('Switch', callback=switch_button)
+    start_dearpygui(primary_window='QoS Settings')
+
 
 def main():
-    start_dearpygui()
+    init_driver()
+    login_and_navigation()
+    gui()
 
 
-init_driver()
-login_and_navigation()
-before_qos_state = qos_state()
-print(before_qos_state)
-click_radio_off()
-after_qos_state = qos_state()
-print(after_qos_state)
-
+if __name__ == '__main__':
+    main()
 
 
