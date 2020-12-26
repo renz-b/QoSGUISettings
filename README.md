@@ -18,4 +18,3 @@ Packages and methods used:
 
 #### To Do:
 - Tried radio buttons with an 'Apply' button, failed to get_value of data from radio buttons during runtime. Once the value was set it does not change.
-- Failed adding an 'Updated settings changed to:' text. Having a hard time getting values once variables are set. Upon starting, qos is set to 'Off' when changed to on and confirmed using debug, print statements, and manually checking the settings it would still show in the GUI that it is 'Off' not 'On.
