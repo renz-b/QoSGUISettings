@@ -32,15 +32,15 @@ def click_off(sender,data):
 
 
 set_main_window_pos(800,400)
-set_main_window_size(320, 160)
+set_main_window_size(420, 190)
 set_theme('Light')
-set_style_window_padding(15,15)
+set_style_window_padding(20,15)
 
 
 with window('Main'):
     print('Main window runnning...')
     add_text('Running')
-    show_logger()
+    # show_logger()
     qos_settings.init_driver()
     log_debug('Page loaded...')
     qos_settings.login_and_navigation()
