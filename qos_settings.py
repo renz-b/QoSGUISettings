@@ -19,7 +19,7 @@ qos_off_radio = ''
 def init_driver():
     options = webdriver.ChromeOptions()
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    options.headless = False
+    options.headless = True
     global driver
     driver = webdriver.Chrome(executable_path=PATH, options=options)
     driver.get(MY_ROUTER_IP)

@@ -4,11 +4,13 @@ import qos_settings
 
 
 def click_on(sender, data):
+    delete_item('text')
     qos_settings.click_radio_on()
     log_debug('qos on has been clicked...')
 
 
 def click_off(sender,data):
+    delete_item('text')
     qos_settings.click_radio_off()
     log_debug('qos off has been clicked...')
 
@@ -44,8 +46,8 @@ with window('Main'):
     qos_settings.login_and_navigation()
     log_debug('Logging in..')
     log_debug('Navigating page...')
-    # current = qos_settings.qos_state()
-    # add_text('text', default_value=f'Current setting is: {current}')
+    current = qos_settings.qos_state()
+    add_text('text', default_value=f'Current setting is: {current}')
     add_text('Qos settings: ')
     add_spacing(count=1)
     add_separator()
