@@ -31,12 +31,14 @@ def click_off(sender,data):
 #     add_text('text1', parent='Main', default_value=f'Current: {state}')
 
 
+# GUI settings
 set_main_window_pos(800,400)
 set_main_window_size(420, 190)
 set_theme('Light')
 set_style_window_padding(20,15)
 
 
+# main window
 with window('Main'):
     print('Main window runnning...')
     add_text('Running')
